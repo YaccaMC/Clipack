@@ -1,5 +1,6 @@
 plugins {
-    id("java")
+    java
+    `maven-publish`
 }
 
 group = "me.yaccamc.clipack"
@@ -12,6 +13,31 @@ repositories {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+
+    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_21
+}
+
+publishing {
+    repositories {
+        maven("https://repo.menthamc.com/repository/maven-release") {
+            credentials(PasswordCredentials::class)
+            name = "yacca"
+        }
+    }
+
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
+        }
+    }
 }
 
 dependencies {
