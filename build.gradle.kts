@@ -25,7 +25,7 @@ java {
 
 publishing {
     repositories {
-        maven("https://repo.menthamc.com/repository/maven-release") {
+        maven("https://repo.menthamc.com/repository/maven-releases/") {
             credentials(PasswordCredentials::class)
             name = "yacca"
         }
