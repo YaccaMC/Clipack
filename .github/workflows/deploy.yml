@@ -26,7 +26,9 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Deploy release
-        run: ./gradlew -Dorg.gradle.parallel=true publish --no-daemon --stacktrace
+        run: |
+          chmod +x ./gradlew
+          ./gradlew publish
         env:
           ORG_GRADLE_PROJECT_yaccaUsername: ${{ secrets.DEPLOY_USER }}
           ORG_GRADLE_PROJECT_yaccaPassword: ${{ secrets.DEPLOY_PASS }}
